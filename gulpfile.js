@@ -7,15 +7,17 @@ var del = require('del');
 var scriptsTask = require('./tasks/scripts.task.js')(config.scripts);
 var stylesTask = require('./tasks/styles.task.js')(config.styles);
 var htmlBuildTask = require('./tasks/htmlBuild.task.js')(config.htmlBuild);
+var serverTask = require('./tasks/server.task.js')(__dirname+'/dist');
 //** End Tasks **//
 
 gulp.task('scripts', scriptsTask);
 gulp.task('styles', stylesTask);
 gulp.task('htmlBuild', htmlBuildTask);
+gulp.task('server', serverTask);
 gulp.task('clean', function(cb) {
   del([config.buildFolder],cb);
 });
 
 gulp.task('default', function() {
-  runSequence('clean', ['scripts', 'styles'], 'htmlBuild');
+  runSequence('clean', ['scripts', 'styles'], 'htmlBuild', 'server');
 });
