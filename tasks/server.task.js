@@ -6,5 +6,5 @@ module.exports = function(path){
     var app = express();
     app.use(express.static(path));
     app.listen(8000);
-  }
-}
+  };
+};

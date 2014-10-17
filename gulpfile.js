@@ -16,12 +16,23 @@ gulp.task('styles-dev', stylesTask.dev);
 gulp.task('styles-prod', stylesTask.prod);
 gulp.task('htmlBuild', htmlBuildTask);
 gulp.task('server', serverTask);
+
+gulp.task('watch', function() {
+  gulp.watch(config.scripts.src, function() {
+    runSequence('scripts-dev', 'htmlBuild');
+  });
+  gulp.watch(config.styles.src, function() {
+    runSequence('styles-dev', 'htmlBuild');
+  });
+  gulp.watch(config.htmlBuild.target, ['htmlBuild']);
+});
+
 gulp.task('clean', function(cb) {
   del([config.buildFolder],cb);
 });
 
 gulp.task('dev', function() {
-  runSequence('clean', ['scripts-dev', 'styles-dev'], 'htmlBuild', 'server');
+  runSequence('clean', ['scripts-dev', 'styles-dev', 'watch'], 'htmlBuild', 'server');
 });
 
 gulp.task('prod', function() {
