@@ -20,5 +20,5 @@ module.exports = function(config){
                 .pipe(gulp.dest(dest));
     }
   };
-  return task
+  return task;
 };

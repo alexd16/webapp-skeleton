@@ -23,4 +23,4 @@ module.exports = {
     srcStyles: ['app/**/*.css'],
     dest: buildFolder
   }
-}
+};
