@@ -24,7 +24,7 @@ module.exports = function(config){
     return gulp
               .src(src)
               .pipe(changed(dest))
-              .pipe(coffee());
+              .pipe(coffee().on('error', function() {}));
   }
   return task;
 };

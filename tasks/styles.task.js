@@ -10,7 +10,8 @@ module.exports = function(config){
       return gulp
                 .src(src)
                 .pipe(changed(dest))
-                .pipe(sass({compass: true}))
+                .pipe(sass({compass: true, noCache: true}))
+                .on('error', function(err) { console.log(err.message); })
                 .pipe(gulp.dest(dest));
     },
     prod: function() {
