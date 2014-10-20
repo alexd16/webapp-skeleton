@@ -9,23 +9,21 @@ var refresh = require('gulp-livereload');
 var scriptsTask = require('./tasks/scripts.task.js')(config.scripts);
 var stylesTask = require('./tasks/styles.task.js')(config.styles);
 var htmlBuildTask = require('./tasks/htmlBuild.task.js')(config.htmlBuild);
-var serverTask = require('./tasks/server.task.js')(__dirname+'/dist', lr);
+var serverTask = require('./tasks/server.task.js')(config.server, lr);
+var testTask = require('./tasks/test.task.js')(config.test);
 //** End Tasks **//
 
 gulp.task('scripts-dev', function(){ 
   scriptsTask.dev().pipe(refresh(lr));
 });
-
 gulp.task('styles-dev', function(){
   stylesTask.dev().pipe(refresh(lr));
 });
 gulp.task('scripts-prod', scriptsTask.prod);
 gulp.task('styles-prod', stylesTask.prod);
-
 gulp.task('htmlBuild', function() {
   htmlBuildTask().pipe(refresh(lr));
 });
-
 gulp.task('server', serverTask);
 
 gulp.task('watch', function() {
@@ -41,6 +39,8 @@ gulp.task('watch', function() {
 gulp.task('clean', function(cb) {
   del([config.buildFolder],cb);
 });
+
+gulp.task('test', testTask);
 
 gulp.task('dev', function(cb) {
   runSequence('clean', ['scripts-dev', 'styles-dev', 'watch'], 'htmlBuild', 'server', cb);
