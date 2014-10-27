@@ -14,15 +14,15 @@ var testTask = require('./tasks/test.task.js')(config.test);
 //** End Tasks **//
 
 gulp.task('scripts-dev', function(){ 
-  scriptsTask.dev().pipe(refresh(lr));
+  return scriptsTask.dev().pipe(refresh(lr));
 });
 gulp.task('styles-dev', function(){
-  stylesTask.dev().pipe(refresh(lr));
+  return stylesTask.dev().pipe(refresh(lr));
 });
 gulp.task('scripts-prod', scriptsTask.prod);
 gulp.task('styles-prod', stylesTask.prod);
 gulp.task('htmlBuild', function() {
-  htmlBuildTask().pipe(refresh(lr));
+  return htmlBuildTask().pipe(refresh(lr));
 });
 gulp.task('server', serverTask);
 
@@ -37,17 +37,17 @@ gulp.task('watch', function() {
 });
 
 gulp.task('clean', function(cb) {
-  del([config.buildFolder],cb);
+  return del([config.buildFolder],cb);
 });
 
 gulp.task('test', testTask);
 
 gulp.task('dev', function(cb) {
-  runSequence('clean', ['scripts-dev', 'styles-dev', 'watch'], 'htmlBuild', 'server', cb);
+  return runSequence('clean', ['scripts-dev', 'styles-dev', 'watch'], 'htmlBuild', 'server', cb);
 });
 
 gulp.task('prod', function() {
-  runSequence('clean', ['scripts-prod', 'styles-prod'], 'htmlBuild');
+  return runSequence('clean', ['scripts-prod', 'styles-prod'], 'htmlBuild');
 });
 
 gulp.task('default', ['dev']);
