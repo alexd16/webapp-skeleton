@@ -26,7 +26,7 @@ _(config.tasks).each(function(taskName){
 gulp.task('watch', watches);
 
 gulp.task('dev', function(cb) {
-  return runSequence('clean', ['scripts-dev', 'styles-dev', 'watch'], 'htmlBuild', 'server', cb);
+  return runSequence('clean', ['scripts-dev', 'styles-dev', 'templates', 'watch'], 'htmlBuild', 'server', cb);
 });
 
 gulp.task('default', ['dev']);

@@ -15,10 +15,16 @@ module.exports = {
   },
   htmlBuild: {
     target: 'index.html',
-    srcScripts: ['js/**/*.js'],
+    srcScripts: [
+      'js/**/*.js'
+    ],
     srcStyles: ['css/**/*.css']
   },
   server: {
     routes: '/config/serverRoutes.js'
+  },
+  templates: {
+    src: ['app/**/*.html', '!app/index.html'],
+    dest: '/templates'
   }
 };
