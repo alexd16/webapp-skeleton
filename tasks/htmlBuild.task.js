@@ -1,14 +1,18 @@
 var gulp = require('gulp');
 var inject = require("gulp-inject");
+var refresh = require('gulp-livereload');
 
-module.exports = function(config){
-  return function() {
-    var scripts = gulp.src(config.srcScripts, { cwd: config.cwd, read: false });
-    var styles = gulp.src(config.srcStyles, { cwd: config.cwd, read: false });
-    return gulp
-              .src(config.target)
-              .pipe(inject(scripts))
-              .pipe(inject(styles))
-              .pipe(gulp.dest(config.dest));
+module.exports = function(config, lr, files){
+  return {
+    normal: function() {
+      var scripts = gulp.src(files.srcScripts, { cwd: config.distPath, read: false });
+      var styles = gulp.src(files.srcStyles, { cwd: config.distPath, read: false });
+      return gulp
+                .src(files.target, { cwd: config.srcPath })
+                .pipe(inject(scripts))
+                .pipe(inject(styles))
+                .pipe(gulp.dest(config.distPath))
+                .pipe(refresh(lr));
+    }
   };
 };

@@ -30,5 +30,8 @@
     "request": "^2.47.0",
     "run-sequence": "^1.0.1",
     "tiny-lr": "^0.1.4"
+  },
+  "dependencies": {
+    "string": "^2.2.0"
   }
 }
