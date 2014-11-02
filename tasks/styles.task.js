@@ -11,11 +11,11 @@ module.exports = function(config, lr, files){
   var dest = config.distPath+files.dest;
   var task = {
     dev: function() {
-      return styles({ compass: true, noCache: true })
+      return styles({ compass: true, noCache: true, style: 'expanded', lineNumbers: true })
                 .pipe(gulp.dest(dest));
     },
     prod: function() {
-      return styles({ compass: true, noCache: true })
+      return styles({ compass: true, noCache: true, style: 'compressed' })
                 .pipe(gulp.dest(dest));
     },
     watch: function() {
