@@ -1,31 +1,37 @@
 module.exports = {
   scripts: {
-    src: ['app/**/*.coffee', 'app/**/*.js', '!app/**/*.spec.coffee', '!app/**/*.spec.coffee'],
+    src: [
+      'app/**/*.coffee', 'app/**/*.js', '!app/**/*.spec.coffee', '!app/**/*.spec.coffee'
+    ],
     vendorSrc: [
       'bower_components/jquery/dist/jquery.js'
     ],
-    dest: '/js'
+    dest: '/assets/js'
   },
   styles: {
     src: ['app/**/*.scss'],
     vendorSrc: [
       'bower_components/bootstrap/dist/css/bootstrap.css'
     ],
-    dest: '/css'
+    dest: '/assets/css'
   },
   fonts: {
     src: [],
     vendorSrc: [
       'bower_components/bootstrap/fonts/*.+(eot|svg|ttf|woff)',
     ],
-    dest: '/fonts'
+    dest: '/assets/fonts'
+  },
+  images: {
+    src: ['app/assets/images/**/*'],
+    dest: '/assets/images'
   },
   htmlBuild: {
     target: 'index.html',
     srcScripts: [
-      'js/**/*.js'
+      'assets/js/**/*.js'
     ],
-    srcStyles: ['css/**/*.css']
+    srcStyles: ['assets/css/**/*.css']
   },
   server: {
     routes: '/config/serverRoutes.js'

@@ -4,7 +4,7 @@ module.exports = {
   rootPath: rootPath,
   srcPath: rootPath+'/app',
   distPath: rootPath+'/dist',
-  tasks: ['clean', 'scripts', 'styles', 'fonts', 'templates', 'htmlBuild', 'server'],
+  tasks: ['clean', 'scripts', 'styles', 'fonts', 'images', 'templates', 'htmlBuild', 'server'],
   apiProxy: {
     enabled: true,
     host: 'localhost',
