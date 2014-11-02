@@ -13,6 +13,13 @@ module.exports = {
     ],
     dest: '/css'
   },
+  fonts: {
+    src: [],
+    vendorSrc: [
+      'bower_components/bootstrap/fonts/*.+(eot|svg|ttf|woff)',
+    ],
+    dest: '/fonts'
+  },
   htmlBuild: {
     target: 'index.html',
     srcScripts: [
