@@ -3,28 +3,28 @@ var express = require('express');
 var connect = require('connect-livereload');
 var request = require('request');
 
-
-module.exports = function(config, lr, files){
-  var serverRoutesFn = require(process.cwd()+files.routes).routes;
-  return {
-    normal: function() {
-      var app = express();
-      var apiRouter = express.Router();
-
-      app.use(connect());  
-      app.use(express.static(config.distPath));
-      serverRoutesFn(apiRouter);
-      app.use('/api', apiRouter);
-      var proxyOptions = config.apiProxy;
-      if (proxyOptions.enabled) {
-        app.use('/api', function(req, res) {
-          var path = 'http://'+proxyOptions.host+':'+proxyOptions.port+req.url;
-          req.pipe(request(path)).pipe(res); 
-        });        
-      }
-      
-      app.listen(8000);
-      lr.listen(35729);
+module.exports = function(config, lr) {
+  gulp.task('server', function() {
+    var app = express();
+    var apiStubRouter = express.Router();
+    app.use(connect());
+    app.use(express.static(config.distPath));
+    
+    var apiStubRouterFn = require(process.cwd()+'/config/apiStub.js').routes;
+    apiStubRouterFn(apiStubRouter);
+    app.use(config.apiPrefix, apiStubRouter);
+    var proxyOptions = config.apiProxy;
+    if (proxyOptions.enabled) {
+      app.use(config.apiPrefix, function(req, res) {
+        var url = proxyOptions.host+req.url;
+        var options = {
+          url: url,
+          headers: req.headers
+        }
+        req.pipe(request(options)).pipe(res);
+      });
     }
-  };
+    app.listen(8000);
+    lr.listen(35729);
+  })
 };

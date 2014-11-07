@@ -5,10 +5,9 @@ module.exports = {
   srcPath: rootPath+'/app',
   distPath: rootPath+'/dist',
   tasks: ['clean', 'scripts', 'styles', 'fonts', 'images', 'templates', 'htmlBuild', 'server'],
+  apiPrefix: '/api',
   apiProxy: {
     enabled: true,
-    host: 'localhost',
-    port: '3000',
-    urlPrefix: 'api'
+    host: 'http://localhost:3000',
   }
 };

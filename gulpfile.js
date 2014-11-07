@@ -1,32 +1,16 @@
 var config = require('./config/app.js');
 var files = require('./config/files.js');
-var _ = require('lodash');
 var gulp = require('gulp');
-var runSequence = require('run-sequence');
+var _ = require('lodash');
 var lr = require('tiny-lr')();
+var runSequence = require('run-sequence').use(gulp);
 
-var watches = [];
+require('./tasks/build.task')(files, lr);
+require('./tasks/watch.task')(files, lr);
+require('./tasks/server.task')(config, lr);
 
-_(config.tasks).each(function(taskName){
-  var taskFn = require('./tasks/'+taskName+'.task.js');
-  var taskFiles = files[taskName];
-  var task = taskFn(config, lr, taskFiles);
-  if (task.dev) {
-    gulp.task(taskName+'-dev', task.dev);
-    gulp.task(taskName+'-prod', task.prod);
-  } else {
-    gulp.task(taskName, task.normal);
-  }
-  if (task.watch) {
-    gulp.task('watch'+taskName, task.watch);
-    watches.push('watch'+taskName);
-  }
+gulp.task('serve', function(cb){ 
+  return runSequence('build', ['watch', 'server'], cb);
 });
+gulp.task('default', ['serve']);
 
-gulp.task('watch', watches);
-
-gulp.task('dev', function(cb) {
-  return runSequence('clean', ['scripts-dev', 'styles-dev', 'fonts', 'images', 'templates', 'watch'], 'htmlBuild', 'server', cb);
-});
-
-gulp.task('default', ['dev']);

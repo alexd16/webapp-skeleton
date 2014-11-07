@@ -1,43 +1,39 @@
 module.exports = {
   scripts: {
     src: [
-      'app/**/*.coffee', 'app/**/*.js', '!app/**/*.spec.coffee', '!app/**/*.spec.coffee'
+      'bower_components/jquery/dist/jquery.js',
+      'app/activities/another/sdfdsf.js',
+      'app/zed1.js', 
+      'app/**/*.coffee', 
+      'app/**/*.js'
     ],
-    vendorSrc: [
-      'bower_components/jquery/dist/jquery.js'
-    ],
-    dest: '/assets/js'
+    filters: '!*.spec.*',
+    dest: 'dist/js'
   },
   styles: {
-    src: ['app/**/*.scss'],
-    vendorSrc: [
-      'bower_components/bootstrap/dist/css/bootstrap.css'
+    src: [
+      'bower_components/bootstrap/dist/css/bootstrap.css',
+      'app/**/main.scss'
     ],
-    dest: '/assets/css'
-  },
-  fonts: {
-    src: [],
-    vendorSrc: [
-      'bower_components/bootstrap/fonts/*.+(eot|svg|ttf|woff)',
-    ],
-    dest: '/assets/fonts'
-  },
-  images: {
-    src: ['app/assets/images/**/*'],
-    dest: '/assets/images'
-  },
-  htmlBuild: {
-    target: 'index.html',
-    srcScripts: [
-      'assets/js/**/*.js'
-    ],
-    srcStyles: ['assets/css/**/*.css']
-  },
-  server: {
-    routes: '/config/serverRoutes.js'
+    dest: 'dist/css'
   },
   templates: {
-    src: ['app/**/*.html', '!app/index.html'],
-    dest: '/templates'
+    src: 'app/**/*.html',
+    filters: '!index.html',
+    dest: 'dist/templates'
+  },
+  images: {
+    src: 'app/images/**/*.+(png|jpg)',
+    dest: 'dist/images'
+  },
+  fonts: {
+    src: [
+      'bower_components/bootstrap/fonts/*.+(eot|svg|ttf|woff)'
+    ],
+    dest: 'dist/fonts'
+  },
+  html:{
+    src: 'app/index.html',
+    dest: 'dist'
   }
 };
