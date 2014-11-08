@@ -4,6 +4,7 @@ module.exports = {
   rootPath: rootPath,
   srcPath: rootPath+'/app',
   distPath: rootPath+'/dist',
+  karmaConfig: rootPath+'/config/karma.conf.js',
   tasks: ['clean', 'scripts', 'styles', 'fonts', 'images', 'templates', 'htmlBuild', 'server'],
   apiPrefix: '/api',
   apiProxy: {

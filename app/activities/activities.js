@@ -1,1 +1,1 @@
-console.log('HERE ACtivities');
+console.log('HERE ACtiv');
