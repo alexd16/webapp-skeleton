@@ -1,1 +1,3 @@
-console.log 'Hello Coffeeeeeeeeee'
+class window.App
+  sayHello: ->
+    'Hello World'
